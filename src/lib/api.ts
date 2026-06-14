@@ -8,7 +8,10 @@
 import { io as socketIO } from 'socket.io-client';
 
 // ── Configuration ────────────────────────────────────────────────────
-const API_URL = import.meta.env.VITE_API_URL || (typeof window !== 'undefined' ? `http://${window.location.hostname}:3001` : 'http://localhost:3001');
+// In production (Vercel), API is on the same domain at /api.
+// In dev, the Express backend runs on localhost:3001.
+const IS_DEV = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+const API_URL = import.meta.env.VITE_API_URL || (IS_DEV ? `http://${window.location.hostname}:3001` : '');
 const TOKEN_KEY = 'ntc:token';
 
 // ── Token management ─────────────────────────────────────────────────
@@ -200,6 +203,12 @@ export function connectSocket(onEvents?: {
   onSeasonReset?: (data: unknown) => void;
   onZonesDecayed?: (data: unknown) => void;
 }) {
+  // Socket.io only works in dev (Express server). On Vercel, skip silently.
+  if (!IS_DEV) {
+    console.log('ℹ️ Socket.io disabled in production (serverless)');
+    return null;
+  }
+
   if (socket?.connected) return socket;
 
   const token = getToken();

@@ -8,10 +8,12 @@ export function AchievementsSheet({ open, onClose }: { open: boolean; onClose: (
   const zones = useGame((s) => s.zones);
   const leaderboard = useGame((s) => s.leaderboard);
   const unlocked = useGame((s) => s.unlockedAchievements);
+  const loopsClosed = useGame((s) => s.loopsClosed);
+  const defendCount = useGame((s) => s.defendCount);
 
   if (!open) return null;
 
-  const ctx = { user, zones, leaderboard };
+  const ctx = { user, zones, leaderboard, loopsClosed, defendCount };
   const tint = user ? TERRITORY_HEX[user.color] : "#32D7FF";
   const completion = (unlocked.size / ACHIEVEMENTS.length) * 100;
 
