@@ -1,0 +1,262 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-crimson: var(--crimson);
+  --color-cyan: var(--cyan);
+  --color-volt: var(--volt);
+  --color-magenta: var(--magenta);
+  --color-amber: var(--amber);
+  --color-violet: var(--violet);
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: oklch(0.985 0 0);
+  --foreground: oklch(0.15 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0 0);
+  --primary: oklch(0.15 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.95 0 0);
+  --secondary-foreground: oklch(0.15 0 0);
+  --muted: oklch(0.95 0 0);
+  --muted-foreground: oklch(0.45 0 0);
+  --accent: oklch(0.95 0 0);
+  --accent-foreground: oklch(0.15 0 0);
+  --destructive: oklch(0.62 0.24 27);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.15 0 0 / 0.12);
+  --input: oklch(0.15 0 0 / 0.12);
+  --ring: oklch(0.15 0 0 / 0.4);
+
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --map-base: #f9f9f9;
+  --map-line: #1a1a1a;
+
+  --crimson: #ff3b30;
+  --cyan: #32d7ff;
+  --volt: #34c759;
+  --magenta: #ff2d92;
+  --amber: #ffb300;
+  --violet: #af52de;
+}
+
+.dark {
+  --background: oklch(0.04 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.08 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.08 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.04 0 0);
+  --secondary: oklch(0.15 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.15 0 0);
+  --muted-foreground: oklch(0.65 0 0);
+  --accent: oklch(0.15 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.7 0.19 22);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(1 0 0 / 0.12);
+  --input: oklch(1 0 0 / 0.15);
+  --ring: oklch(1 0 0 / 0.3);
+
+  --glass-bg: rgba(15, 15, 15, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --map-base: #0a0a0a;
+  --map-line: #ffffff;
+}
+
+@utility glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    0 18px 55px rgba(0, 0, 0, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+@utility no-tap {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html,
+  body,
+  #root {
+    height: 100%;
+    min-height: 100%;
+    overflow: hidden;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overscroll-behavior: none;
+  }
+  .font-mono,
+  .tabular {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.game-map-shell,
+.game-map-shell .maplibregl-map,
+.game-map-shell .maplibregl-canvas-container,
+.game-map-shell .maplibregl-canvas {
+  min-height: 100dvh !important;
+  width: 100dvw !important;
+  height: 100dvh !important;
+}
+
+.game-map-shell {
+  background:
+    linear-gradient(color-mix(in srgb, var(--cyan) 10%, transparent), transparent 28%),
+    var(--map-base);
+}
+
+.donation-field {
+  background:
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--foreground) 6%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--foreground) 6%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(135deg, color-mix(in srgb, var(--cyan) 12%, transparent), transparent 34%),
+    linear-gradient(315deg, color-mix(in srgb, var(--amber) 16%, transparent), transparent 32%);
+  background-size:
+    42px 42px,
+    42px 42px,
+    100% 100%,
+    100% 100%;
+  opacity: 0.72;
+}
+
+@keyframes conquestPulse {
+  0%,
+  100% {
+    fill-opacity: 0.3;
+  }
+  50% {
+    fill-opacity: 0.7;
+  }
+}
+
+@keyframes gpsPing {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+@keyframes gpsCore {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+.gps-marker {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  --player-color: var(--cyan);
+  z-index: 10;
+}
+.gps-marker::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  background: var(--player-color);
+  opacity: 0.35;
+  animation: gpsPing 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+.gps-marker::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 9999px;
+  background: var(--player-color);
+  box-shadow:
+    0 0 0 3px var(--background),
+    0 0 0 5px var(--player-color),
+    0 0 20px var(--player-color);
+  animation: gpsCore 2s ease-in-out infinite;
+}
+
+/* Strip every MapLibre attribution chrome — we want pure blueprint look */
+.maplibregl-ctrl-bottom-right,
+.maplibregl-ctrl-bottom-left,
+.maplibregl-ctrl-attrib {
+  display: none !important;
+}
+
+.collapsed-cv {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 400px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gps-marker::before,
+  .gps-marker::after {
+    animation: none !important;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
