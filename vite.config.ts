@@ -9,6 +9,9 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 export default defineConfig({
   nitro: {
     preset: "vercel",
+    externals: {
+      external: ["mongoose", "mongodb"]
+    },
     // @ts-ignore - Lovable's types omit 'handlers' but Nitro supports it natively
     handlers: [
       {
